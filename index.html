@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover Nepal - The Himalayan Kingdom</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1526029657216-1a2e4f5c43b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+        
+        header p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+        
+        .flag {
+            display: flex;
+            margin-bottom: 30px;
+        }
+        
+        .flag-color {
+            height: 30px;
+            width: 60px;
+        }
+        
+        .red {
+            background-color: #DC143C;
+        }
+        
+        .blue {
+            background-color: #003893;
+            position: relative;
+        }
+        
+        .blue::after {
+            content: "☀";
+            position: absolute;
+            color: white;
+            font-size: 20px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: #003893;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        nav ul li {
+            padding: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: #DC143C;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+        
+        section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #003893;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image img:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Geography Section */
+        .geography-content {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Culture Section */
+        .culture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .culture-item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .culture-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .culture-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .culture-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .culture-item:hover .culture-image img {
+            transform: scale(1.1);
+        }
+        
+        .culture-text {
+            padding: 20px;
+        }
+        
+        .culture-text h3 {
+            color: #DC143C;
+            margin-bottom: 10px;
+        }
+        
+        /* Tourism Section */
+        .tourism-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .highlight-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .highlight-image {
+            height: 180px;
+            overflow: hidden;
+        }
+        
+        .highlight-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .highlight-text {
+            padding: 20px;
+        }
+        
+        .highlight-text h3 {
+            color: #003893;
+            margin-bottom: 10px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #003893;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        footer p {
+            margin-bottom: 10px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+            
+            header p {
+                font-size: 1.2rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="flag">
+            <div class="flag-color red"></div>
+            <div class="flag-color blue"></div>
+            <div class="flag-color red"></div>
+        </div>
+        <h1>NEPAL</h1>
+        <p>Land of the Himalayas, birthplace of Buddha, and home to Mount Everest</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#geography">Geography</a></li>
+            <li><a href="#culture">Culture</a></li>
+            <li><a href="#tourism">Tourism</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <section id="about">
+            <h2>About Nepal</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Nepal, officially the Federal Democratic Republic of Nepal, is a landlocked country in South Asia. It is located mainly in the Himalayas but also includes parts of the Indo-Gangetic Plain. With an estimated population of 30 million, Nepal is the 48th largest country by population and 93rd largest country by area.</p>
+                    <p>Nepal has a diverse geography, including fertile plains, subalpine forested hills, and eight of the world's ten tallest mountains, including Mount Everest, the highest point on Earth. Kathmandu is the nation's capital and largest city.</p>
+                    <p>Nepal is a multi-ethnic, multi-lingual, multi-religious and multi-cultural state, with Nepali as the official language. The country was never colonized and served as a buffer state between Imperial China and British India.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1581841195855-cfd38a8f4ac1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Kathmandu, Nepal">
+                </div>
+            </div>
+        </section>
+        
+        <section id="geography">
+            <h2>Geography & Climate</h2>
+            <div class="geography-content">
+                <p>Nepal can be divided into three main geographical regions:</p>
+                <ul style="margin: 20px 0 20px 40px;">
+                    <li><strong>Himalayan Region:</strong> The altitude of this region ranges between 4,877m and 8,848m. It includes eight of the highest peaks in the world.</li>
+                    <li><strong>Mountain Region:</strong> This region accounts for about 64% of total land area. The Mahabharat range rises to 4,877m.</li>
+                    <li><strong>Terai Region:</strong> The lowland Terai region has a width ranging from 26km to 32km and altitude ranging from 60m to 305m.</li>
+                </ul>
+                <p>Nepal has five climatic zones, broadly corresponding to the altitudes. The tropical and subtropical zones lie below 1,200 meters, the temperate zone 1,200 to 2,400 meters, the cold zone 2,400 to 3,600 meters, the subarctic zone 3,600 to 4,400 meters, and the Arctic zone above 4,400 meters.</p>
+            </div>
+        </section>
+        
+        <section id="culture">
+            <h2>Culture & Heritage</h2>
+            <div class="culture-grid">
+                <div class="culture-item">
+                    <div class="culture-image">
+                        <img src="https://images.unsplash.com/photo-1560843581-34d6d3b2a266?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Nepali Festival">
+                    </div>
+                    <div class="culture-text">
+                        <h3>Festivals</h3>
+                        <p>Nepal celebrates numerous festivals throughout the year, including Dashain, Tihar, Holi, and Buddha Jayanti. These festivals reflect the country's rich cultural diversity and religious harmony.</p>
+                    </div>
+                </div>
+                
+                <div class="culture-item">
+                    <div class="culture-image">
+                        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Nepali Cuisine">
+                    </div>
+                    <div class="culture-text">
+                        <h3>Cuisine</h3>
+                        <p>Nepali cuisine is diverse, with dal bhat (lentil soup with rice) being the staple food. Other popular dishes include momo (dumplings), sel roti (rice doughnut), and gundruk (fermented leafy greens).</p>
+                    </div>
+                </div>
+                
+                <div class="culture-item">
+                    <div class="culture-image">
+                        <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Nepali Architecture">
+                    </div>
+                    <div class="culture-text">
+                        <h3>Architecture</h3>
+                        <p>Nepal is famous for its pagoda-style architecture, seen in temples like Pashupatinath and Nyatapola. The Kathmandu Valley has seven UNESCO World Heritage Sites.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="tourism">
+            <h2>Tourism Highlights</h2>
+            <div class="tourism-highlights">
+                <div class="highlight-card">
+                    <div class="highlight-image">
+                        <img src="https://images.unsplash.com/photo-1581841195855-cfd38a8f4ac1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Kathmandu Valley">
+                    </div>
+                    <div class="highlight-text">
+                        <h3>Kathmandu Valley</h3>
+                        <p>The cultural heart of Nepal with ancient temples, palaces, and vibrant markets.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-card">
+                    <div class="highlight-image">
+                        <img src="https://images.unsplash.com/photo-1526029657216-1a2e4f5c43b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Mount Everest">
+                    </div>
+                    <div class="highlight-text">
+                        <h3>Mount Everest</h3>
+                        <p>The world's highest peak at 8,848 meters, a dream destination for trekkers.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-card">
+                    <div class="highlight-image">
+                        <img src="https://images.unsplash.com/photo-1560851211-6a4f9ce01a6c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Pokhara">
+                    </div>
+                    <div class="highlight-text">
+                        <h3>Pokhara</h3>
+                        <p>Known for its tranquil lakes and stunning views of the Annapurna mountain range.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-card">
+                    <div class="highlight-image">
+                        <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Chitwan National Park">
+                    </div>
+                    <div class="highlight-text">
+                        <h3>Chitwan National Park</h3>
+                        <p>A UNESCO World Heritage Site famous for wildlife viewing, including rhinos and tigers.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>© 2023 Discover Nepal</p>
+        <p>Official Tourism Website of Nepal</p>
+    </footer>
+</body>
+</html>
