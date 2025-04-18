@@ -4,405 +4,775 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Discover Nepal - The Himalayan Kingdom</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
     <style>
-        /* Global Styles */
-        * {
+        /* Reset and Base Styles */
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
+        :root {
+            --nepal-red: #DC143C;
+            --nepal-blue: #003893;
+            --text-dark: #333;
+            --text-light: #fff;
+            --bg-light: #f8f9fa;
+            --bg-dark: #212529;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
         body {
-            background-color: #f5f5f5;
-            color: #333;
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
         }
-        
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
         .container {
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 1.5rem;
         }
-        
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            background-color: var(--nepal-red);
+            color: var(--text-light);
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: rgba(220, 20, 60, 0.9);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
         /* Header Styles */
-        header {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1526029657216-1a2e4f5c43b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-light);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://images.unsplash.com/photo-1526029657216-1a2e4f5c43b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-position: center;
-            height: 100vh;
-            color: white;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            z-index: -1;
         }
-        
-        header h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-        }
-        
-        header p {
-            font-size: 1.5rem;
+
+        .hero-content {
             max-width: 800px;
-            margin-bottom: 30px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            padding: 0 1.5rem;
+            z-index: 1;
         }
-        
-        .flag {
+
+        .nepal-flag {
             display: flex;
-            margin-bottom: 30px;
+            justify-content: center;
+            margin-bottom: 2rem;
         }
-        
-        .flag-color {
-            height: 30px;
-            width: 60px;
+
+        .flag-part {
+            height: 40px;
+            width: 80px;
         }
-        
-        .red {
-            background-color: #DC143C;
+
+        .flag-red {
+            background-color: var(--nepal-red);
         }
-        
-        .blue {
-            background-color: #003893;
+
+        .flag-blue {
+            background-color: var(--nepal-blue);
             position: relative;
         }
-        
-        .blue::after {
+
+        .flag-blue::after {
             content: "☀";
             position: absolute;
             color: white;
-            font-size: 20px;
+            font-size: 24px;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
         }
-        
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+
         /* Navigation */
-        nav {
-            background-color: #003893;
+        .navbar {
             position: sticky;
             top: 0;
+            background-color: var(--nepal-blue);
+            color: var(--text-light);
+            padding: 1rem 0;
             z-index: 100;
+            box-shadow: var(--shadow);
         }
-        
-        nav ul {
+
+        .nav-container {
             display: flex;
-            justify-content: center;
-            list-style: none;
+            justify-content: space-between;
+            align-items: center;
         }
-        
-        nav ul li {
-            padding: 20px;
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
         }
-        
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
+
+        .nav-menu {
+            display: flex;
+        }
+
+        .nav-item {
+            margin-left: 2rem;
+        }
+
+        .nav-link {
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
-            transition: all 0.3s ease;
+            transition: var(--transition);
+            padding: 0.5rem;
         }
-        
-        nav ul li a:hover {
-            color: #DC143C;
+
+        .nav-link:hover {
+            color: var(--nepal-red);
         }
-        
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+        }
+
         /* Section Styles */
         section {
-            padding: 80px 0;
+            padding: 5rem 0;
         }
-        
-        section h2 {
-            text-align: center;
+
+        .section-title {
             font-size: 2.5rem;
-            margin-bottom: 50px;
-            color: #003893;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--nepal-blue);
+            position: relative;
         }
-        
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--nepal-red);
+        }
+
+        /* About Section */
         .about-content {
             display: flex;
             align-items: center;
-            gap: 40px;
+            gap: 3rem;
         }
-        
+
         .about-text {
             flex: 1;
         }
-        
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
         .about-image {
             flex: 1;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
         }
-        
-        .about-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
+
+        .about-image:hover {
+            transform: scale(1.02);
         }
-        
-        .about-image img:hover {
-            transform: scale(1.05);
-        }
-        
+
         /* Geography Section */
+        .geography {
+            background-color: rgba(0, 56, 147, 0.05);
+        }
+
         .geography-content {
             background-color: white;
-            padding: 40px;
+            padding: 2.5rem;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow);
         }
-        
+
+        .geography-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .geography-list {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+            list-style-type: disc;
+        }
+
+        .geography-list li {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .geography-list strong {
+            color: var(--nepal-blue);
+        }
+
         /* Culture Section */
         .culture-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 2rem;
         }
-        
-        .culture-item {
+
+        .culture-card {
             background-color: white;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
         }
-        
-        .culture-item:hover {
+
+        .culture-card:hover {
             transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
         }
-        
+
         .culture-image {
             height: 200px;
             overflow: hidden;
         }
-        
+
         .culture-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
-        
-        .culture-item:hover .culture-image img {
+
+        .culture-card:hover .culture-image img {
             transform: scale(1.1);
         }
-        
+
         .culture-text {
-            padding: 20px;
+            padding: 1.5rem;
         }
-        
+
         .culture-text h3 {
-            color: #DC143C;
-            margin-bottom: 10px;
+            color: var(--nepal-red);
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
         }
-        
+
         /* Tourism Section */
-        .tourism-highlights {
+        .tourism {
+            background-color: rgba(0, 56, 147, 0.05);
+        }
+
+        .tourism-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            gap: 1.5rem;
         }
-        
-        .highlight-card {
+
+        .tourism-card {
             background-color: white;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
         }
-        
-        .highlight-image {
+
+        .tourism-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .tourism-image {
             height: 180px;
             overflow: hidden;
         }
-        
-        .highlight-image img {
+
+        .tourism-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s ease;
         }
-        
-        .highlight-text {
-            padding: 20px;
+
+        .tourism-card:hover .tourism-image img {
+            transform: scale(1.1);
         }
-        
-        .highlight-text h3 {
-            color: #003893;
-            margin-bottom: 10px;
+
+        .tourism-text {
+            padding: 1.5rem;
         }
-        
+
+        .tourism-text h3 {
+            color: var(--nepal-blue);
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
         /* Footer */
-        footer {
-            background-color: #003893;
-            color: white;
+        .footer {
+            background-color: var(--nepal-blue);
+            color: var(--text-light);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--nepal-red);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-link {
+            margin-bottom: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .footer-link:hover {
+            color: var(--nepal-red);
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--nepal-red);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
             text-align: center;
-            padding: 30px 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
-        footer p {
-            margin-bottom: 10px;
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background-color: var(--nepal-red);
+            color: var(--text-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 99;
+            box-shadow: var(--shadow);
         }
-        
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--nepal-blue);
+            transform: translateY(-5px);
+        }
+
         /* Responsive Design */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.5rem;
-            }
-            
-            header p {
-                font-size: 1.2rem;
-            }
-            
+        @media (max-width: 992px) {
             .about-content {
                 flex-direction: column;
             }
-            
-            nav ul {
-                flex-direction: column;
-                align-items: center;
+
+            .about-image {
+                order: -1;
             }
         }
+
+        @media (max-width: 768px) {
+            html {
+                font-size: 14px;
+            }
+
+            .hero-title {
+                font-size: 3.5rem;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: var(--nepal-blue);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: var(--transition);
+                box-shadow: var(--shadow-lg);
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-item {
+                margin: 1.5rem 0;
+            }
+
+            .hamburger {
+                display: block;
+                z-index: 101;
+            }
+
+            .hamburger.active {
+                position: fixed;
+                right: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+       
     </style>
 </head>
 <body>
-    <header>
-        <div class="flag">
-            <div class="flag-color red"></div>
-            <div class="flag-color blue"></div>
-            <div class="flag-color red"></div>
-        </div>
-        <h1>NEPAL</h1>
-        <p>Land of the Himalayas, birthplace of Buddha, and home to Mount Everest</p>
-    </header>
-    
-    <nav>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#geography">Geography</a></li>
-            <li><a href="#culture">Culture</a></li>
-            <li><a href="#tourism">Tourism</a></li>
-        </ul>
-    </nav>
-    
-    <div class="container">
-        <section id="about">
-            <h2>About Nepal</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Nepal, officially the Federal Democratic Republic of Nepal, is a landlocked country in South Asia. It is located mainly in the Himalayas but also includes parts of the Indo-Gangetic Plain. With an estimated population of 30 million, Nepal is the 48th largest country by population and 93rd largest country by area.</p>
-                    <p>Nepal has a diverse geography, including fertile plains, subalpine forested hills, and eight of the world's ten tallest mountains, including Mount Everest, the highest point on Earth. Kathmandu is the nation's capital and largest city.</p>
-                    <p>Nepal is a multi-ethnic, multi-lingual, multi-religious and multi-cultural state, with Nepali as the official language. The country was never colonized and served as a buffer state between Imperial China and British India.</p>
-                </div>
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1581841195855-cfd38a8f4ac1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Kathmandu, Nepal">
-                </div>
-            </div>
-        </section>
-        
-        <section id="geography">
-            <h2>Geography & Climate</h2>
-            <div class="geography-content">
-                <p>Nepal can be divided into three main geographical regions:</p>
-                <ul style="margin: 20px 0 20px 40px;">
-                    <li><strong>Himalayan Region:</strong> The altitude of this region ranges between 4,877m and 8,848m. It includes eight of the highest peaks in the world.</li>
-                    <li><strong>Mountain Region:</strong> This region accounts for about 64% of total land area. The Mahabharat range rises to 4,877m.</li>
-                    <li><strong>Terai Region:</strong> The lowland Terai region has a width ranging from 26km to 32km and altitude ranging from 60m to 305m.</li>
-                </ul>
-                <p>Nepal has five climatic zones, broadly corresponding to the altitudes. The tropical and subtropical zones lie below 1,200 meters, the temperate zone 1,200 to 2,400 meters, the cold zone 2,400 to 3,600 meters, the subarctic zone 3,600 to 4,400 meters, and the Arctic zone above 4,400 meters.</p>
-            </div>
-        </section>
-        
-        <section id="culture">
-            <h2>Culture & Heritage</h2>
-            <div class="culture-grid">
-                <div class="culture-item">
-                    <div class="culture-image">
-                        <img src="https://images.unsplash.com/photo-1560843581-34d6d3b2a266?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Nepali Festival">
-                    </div>
-                    <div class="culture-text">
-                        <h3>Festivals</h3>
-                        <p>Nepal celebrates numerous festivals throughout the year, including Dashain, Tihar, Holi, and Buddha Jayanti. These festivals reflect the country's rich cultural diversity and religious harmony.</p>
-                    </div>
-                </div>
-                
-                <div class="culture-item">
-                    <div class="culture-image">
-                        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Nepali Cuisine">
-                    </div>
-                    <div class="culture-text">
-                        <h3>Cuisine</h3>
-                        <p>Nepali cuisine is diverse, with dal bhat (lentil soup with rice) being the staple food. Other popular dishes include momo (dumplings), sel roti (rice doughnut), and gundruk (fermented leafy greens).</p>
-                    </div>
-                </div>
-                
-                <div class="culture-item">
-                    <div class="culture-image">
-                        <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Nepali Architecture">
-                    </div>
-                    <div class="culture-text">
-                        <h3>Architecture</h3>
-                        <p>Nepal is famous for its pagoda-style architecture, seen in temples like Pashupatinath and Nyatapola. The Kathmandu Valley has seven UNESCO World Heritage Sites.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="tourism">
-            <h2>Tourism Highlights</h2>
-            <div class="tourism-highlights">
-                <div class="highlight-card">
-                    <div class="highlight-image">
-                        <img src="https://images.unsplash.com/photo-1581841195855-cfd38a8f4ac1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Kathmandu Valley">
-                    </div>
-                    <div class="highlight-text">
-                        <h3>Kathmandu Valley</h3>
-                        <p>The cultural heart of Nepal with ancient temples, palaces, and vibrant markets.</p>
-                    </div>
-                </div>
-                
-                <div class="highlight-card">
-                    <div class="highlight-image">
-                        <img src="https://images.unsplash.com/photo-1526029657216-1a2e4f5c43b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Mount Everest">
-                    </div>
-                    <div class="highlight-text">
-                        <h3>Mount Everest</h3>
-                        <p>The world's highest peak at 8,848 meters, a dream destination for trekkers.</p>
-                    </div>
-                </div>
-                
-                <div class="highlight-card">
-                    <div class="highlight-image">
-                        <img src="https://images.unsplash.com/photo-1560851211-6a4f9ce01a6c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Pokhara">
-                    </div>
-                    <div class="highlight-text">
-                        <h3>Pokhara</h3>
-                        <p>Known for its tranquil lakes and stunning views of the Annapurna mountain range.</p>
-                    </div>
-                </div>
-                
-                <div class="highlight-card">
-                    <div class="highlight-image">
-                        <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Chitwan National Park">
-                    </div>
-                    <div class="highlight-text">
-                        <h3>Chitwan National Park</h3>
-                        <p>A UNESCO World Heritage Site famous for wildlife viewing, including rhinos and tigers.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- Loader -->
+    <div class="loader-container">
+        <div class="loader"></div>
     </div>
-    
-    <footer>
-        <p>© 2023 Discover Nepal</p>
-        <p>Official Tourism Website of Nepal</p>
-    </footer>
-</body>
-</html>
+
+    <!-- Hero Section -->
+    <header class="hero" id="home">
+        <div class="hero-content">
+            <div class="nepal-flag">
+                <div class="flag-part flag-red"></div>
+                <div class="flag-part flag-blue"></div>
+            </div>
+            <h1 class="hero-title">NEPAL</h1>
+            <p class="hero-subtitle">Land of the Himalayas, birthplace of Buddha, and home to Mount Everest</p>
+            <a href="#about" class="btn">Explore Now</a>
+        </div>
+        <div class="scroll-indicator">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#home" class="logo">Discover Nepal</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#geography" class="nav-link">Geography</a></li>
+                <li class="nav-item"><a href="#culture" class="nav-link">Culture</a></li>
+                <li class="nav-item"><a href="#tourism" class="nav-link">Tourism</a></li>
+            </ul>
+            <button class="hamburger">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title fade-in">About Nepal</h2>
+                <div class="about-content">
+                    <div class="about-text fade-in">
+                        <p>Nepal, officially the Federal Democratic Republic of Nepal, is a landlocked country in South Asia. It is located mainly in the Himalayas but also includes parts of the Indo-Gangetic Plain. With an estimated population of 30 million, Nepal is the 48th largest country by population and 93rd largest country by area.</p>
+                        <p>Nepal has a diverse geography, including fertile plains, subalpine forested hills, and eight of the world's ten tallest mountains, including Mount Everest, the highest point on Earth. Kathmandu is the nation's capital and largest city.</p>
+                        <p>Nepal is a multi-ethnic, multi-lingual, multi-religious and multi-cultural state, with Nepali as the official language. The country was never colonized and served as a buffer state between Imperial China and British India.</p>
+                    </div>
+                    <div class="about-image fade-in">
+                        <img src="https://images.unsplash.com/photo-1581841195855-cfd38a8f4ac1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Kathmandu, Nepal">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Geography Section -->
+        <section id="geography" class="geography">
+            <div class="container">
+                <h2 class="section-title fade-in">Geography & Climate</h2>
+                <div class="geography-content fade-in">
+                    <p>Nepal can be divided into three main geographical regions:</p>
+                    <ul class="geography-list">
+                        <li><strong>Himalayan Region:</strong> The altitude of this region ranges between 4,877m and 8,848m. It includes eight of the highest peaks in the world.</li>
+                        <li><strong>Mountain Region:</strong> This region accounts for about 64% of total land area. The Mahabharat range rises to 4,877m.</li>
+                        <li><strong>Terai Region:</strong> The lowland Terai region has a width ranging from 26km to 32km and altitude ranging from 60m to 305m.</li>
+                    </ul>
+                    <p>Nepal has five climatic zones, broadly corresponding to the altitudes. The tropical and subtropical zones lie below 1,200 meters, the temperate zone 1,200 to 2,400 meters, the cold zone 2,400 to 3,600 meters, the subarctic zone 3,600 to 4,400 meters, and the Arctic zone above 4,400 meters.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Culture Section -->
+        <section id="culture" class="culture">
+            <div class="container">
+                <h2 class="section-title fade-in">Culture & Heritage</h2>
+                <div class="culture-grid">
+                    <div class="culture-card fade-in">
+                        <div class="culture-image">
+                            <img src="https://images.unsplash.com/photo-1560843581-34d6d3b2a266?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Nepali Festival">
+                        </div>
+                        <div class="culture-text">
+                            <h3>Festivals</h3>
+                            <p>Nepal celebrates numerous festivals throughout the year, including Dashain, Tihar, Holi, and Buddha Jayanti. These festivals reflect the country's rich cultural diversity and religious harmony.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="culture-card fade-in">
+                        <div class="culture-image">
+                            <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Nepali Cuisine">
+                        </div>
+                        <div class="culture-text">
+                            <h3>Cuisine</h3>
+                            <p>Nepali cuisine is diverse, with dal bhat (lentil soup with rice) being the staple food. Other popular dishes include momo (dumplings), sel roti (rice doughnut), and gundruk (fermented leafy greens).</p>
+                        </div>
+                    </div>
+                    
+                    <div class="culture-card fade-in">
+                        <div class="culture-image">
+                            <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Nepali Architecture">
+                        </div>
+                        <div class="culture-text">
+                            <h3>Architecture</h3>
+                            <p>Nepal is famous for its pagoda-style architecture, seen in temples like Pashupatinath and Nyatapola. The Kathmandu Valley has seven UNESCO World Heritage Sites.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tourism Section -->
+        <section id="tourism" class="tourism">
+            <div class="container">
+                <h2 class="section-title fade-in">Tourism Highlights</h2>
+                <div class="tourism-grid">
+                    <div class="tourism-card fade-in">
+                        <div class="tourism-image">
+                            <img src="https://images.unsplash.com/photo-1581841195855-cfd38a8f4ac1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Kathmandu Valley">
+                        </div>
+                        <div class="tourism-text">
+                            <h3>Kathmandu Valley</h3>
+                            <p>The cultural heart of Nepal with ancient temples, palaces, and vibrant markets.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tourism-card fade-in">
+                        <div class="tourism-image">
+                            <img src="https://images.unsplash.com/photo-1526029657216-1a2e4f5c43b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Mount Everest">
+                        </div>
+                        <div class="tourism-text">
+                            <h3>Mount Everest</h3>
+                            <p>The world's highest peak at 8,848 meters, a dream destination for trekkers.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tourism-card fade-in">
+                        <div class="tourism-image">
+                            <img src="https://images.unsplash.com/photo-1560851211-6a4f9ce01a6c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Pokhara">
+                        </div>
+                        <div class="tourism-text">
+                            <h3>Pokhara</h3>
+                            <p>Known for its tranquil lakes and stunning views of the Annapurna mountain range.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tourism-card fade-in">
+                        <div class="tourism-image">
+                            <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Chitwan National Park">
+                        </div>
+                        <div class="tourism-text">
+                            <h3>Chitwan National Park</h3>
+                            <p>A UNESCO World Heritage Site famous for wildlife viewing, including rhinos and tigers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Discover Nepal</h3>
+                    <p>The official tourism website of Nepal, showcasing the beauty and diversity of this Himalayan nation.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-
